@@ -1,0 +1,99 @@
+    <!DOCTYPE html>
+<html>
+<head>
+	<% include ./_head.ejs %>
+</head>
+<body style="height:1000px">
+
+	<% include ./_nav-bar.ejs %>
+            
+            
+
+<div class="container">
+ <% if (score == null) { %>
+  <form method="post" action="/quiz">
+ 			<% var temp1 = results[0]%>
+            <% var temp2 = results[1]%>
+            <% var temp3 = results[2]%>
+            <% var temp4 = results[3]%>
+            <% var temp5 = results[4]%>
+            <% var temp6 = results[5]%>
+            <% var temp7 = results[6]%>
+            <% var temp8 = results[7]%>
+            <% var temp9 = results[8]%>
+            <% var temp10 = results[9]%>
+            <% var temp11 = results[10]%>
+            <% var temp12 = results[11]%>
+            <% var m_overview = "overview" %>
+            <% var m_title = "title" %>
+   <h2> Quiz Time </h2>
+    <br>
+    <p>No.1 <%= temp1[m_overview] %> </p>
+    <select name="FirstQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "1"><%= temp1[m_title] %></option>
+     <option value = "7"><%= temp7[m_title] %></option>
+     <option value = "8"><%= temp8[m_title] %></option>
+     <option value = "9"><%= temp9[m_title] %></option>
+    </select>
+    <br>
+    <p>No.2 <%= temp2[m_overview] %> </p>
+    <select name="SecondQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "7"><%= temp7[m_title] %></option>
+     <option value = "2"><%= temp2[m_title] %></option>
+     <option value = "8"><%= temp8[m_title] %></option>
+     <option value = "9"><%= temp9[m_title] %></option>
+    </select>
+    <br>
+    <p>No.3 <%= temp3[m_overview] %> </p>
+    <select name="ThirdQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "3"><%= temp3[m_title] %></option>
+     <option value = "10"><%= temp10[m_title] %></option>
+     <option value = "8"><%= temp8[m_title] %></option>
+     <option value = "9"><%= temp9[m_title] %></option>
+    </select>
+    <br>
+    <p>No.4 <%= temp4[m_overview] %> </p>
+    <select name="FourthQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "1"><%= temp1[m_title] %></option>
+     <option value = "4"><%= temp4[m_title] %></option>
+     <option value = "8"><%= temp8[m_title] %></option>
+     <option value = "9"><%= temp9[m_title] %></option>
+    </select>
+    <br>
+    <p>No.5 <%= temp5[m_overview] %> </p>
+    <select name="FifthQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "1"><%= temp1[m_title] %></option>
+     <option value = "5"><%= temp5[m_title] %></option>
+     <option value = "8"><%= temp8[m_title] %></option>
+     <option value = "9"><%= temp9[m_title] %></option>
+    </select>
+    <br>
+    <p>No.6 <%= temp6[m_overview] %> </p>
+    <select name="SixthQuestion">
+     <option value = "Select"> Please select </option>
+     <option value = "10"><%= temp10[m_title] %></option>
+     <option value = "7"><%= temp7[m_title] %></option>
+     <option value = "6"><%= temp6[m_title] %></option>
+     <option value = "11"><%= temp11[m_title] %></option>
+    </select>
+    <br>
+    <br>
+   <button type="submit" formmethod="post" formaction="/quiz" class="btn btn-warning btn-lg" >See Results</button>
+   </form>
+   <% } 
+     else { %>
+				<h1>Your total score is:</h1>
+                	<h3><%= score%></h3>
+				
+		<% } %>	
+
+    </div>
+  </body>
+</html>
+    
+     

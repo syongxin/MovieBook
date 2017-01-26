@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./_head.ejs %>
+</head>
+<body style="height:1000px">
+
+	<% include ./_nav-bar.ejs %>
+	
+ <div class="container">
+       <% if (results == null) { %>
+    	   <form method="post" action="/secondquiz">
+    	        <h2> Quiz Time </h2>
+    	        <br>
+    	   		<p>No.1 Has George Lucas takes a role in the movie Beverly Hills Cop III? </p>
+    	   		<select name="answer1">
+    	   		  <option value = "Select"> Please select </option>
+    	   		  <option value = "Yes">Yes</option>
+    	   		  <option value = "No">No</option>
+    	   		</select>
+    	   		
+    	   		<p>No.2 Has Turo Pajala takes a role in the movie Ariel? </p>
+                <select name="answer2">
+                <option value = "Select"> Please select </option>
+                <option value = "Yes">Yes</option>
+    	   		<option value = "No">No</option>
+                </select><br>
+			    <p>No.3 Has Bruce Willis takes a role in the movie Shadows in Paradise? </p>
+			    <select name="answer3">
+			     <option value = "Select"> Please select </option>
+			     <option value = "Yes">Yes</option>
+			     <option value ="No">No</option>
+			    </select>
+			    <br>
+			    <p>No.4 Did Phil Tippett takes a role in Star Wars? </p>
+			    <select name="answer4">
+			     <option value = "Select"> Please select </option>
+			     <option value = "Yes">Yes</option>
+			     <option value ="No">No</option>
+			    </select>
+			    <br>
+    	   		<p>No.5 Did Zach Hanner takes a role in Forrest Gump? </p>
+			    <select name="answer5">
+			     <option value = "Select"> Please select </option>
+			     <option value = "Yes">Yes</option>
+			     <option value ="No">No</option>
+			    </select>
+			    <br>
+			    <p>No.6 In which year did Alan Ladd born?</p>
+			    <select name="answer6">
+			     <option value = "Select"> Please select </option>
+			     <option value = "1913">1913</option>
+			     <option value ="1964">1964</option>
+			     <option value ="1971">1971</option>
+			    </select>
+			    <br><br>
+			    <button type="submit" class="btn btn-warning btn-lg">See Results</button>
+			</form>	
+			 <% } 
+
+        else { %>
+             <p> You have answered <%= results%> questions correctly!</p>
+  	        
+  	     <% } %> 
+    </div>
+  </body>
+</html>

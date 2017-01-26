@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./_head.ejs %>
+</head>
+<body style="height:1000px">
+
+	<% include ./_nav-bar.ejs %>
+	
+ <div class="container">
+  <h2> Start Your Quiz! </h2><br>
+   <h3><i> There are two type of Quiz shown as below </i></h3> <br>
+   <h3><i> Choose one and see how much you know about the movie's world!</i></h3>
+   <h4> Quiz 1. Select the movie based on the overview we given to you </h4>
+   <button id="quiz1" type="submit"  onclick="quiz1()" class="btn btn-warning btn-lg" > Go!</button>
+    
+   <h4> Quiz 2. Test how much you know about the movie stars! </h4><br>
+   <button id="quiz2" type="submit" onclick="quiz2()" class="btn btn-warning btn-lg"> Go!</button>
+    
+    <script>
+  	function quiz1() {
+		window.location.href="/quiz";
+  	}
+
+  	function quiz2() {
+    	window.location.href="/secondquiz";
+  	} 
+  </script>
+  </div>
+ </body>
+</html>
+   

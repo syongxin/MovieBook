@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./_head.ejs %>
+    
+</head>
+<body>
+
+    <% include ./_nav-bar.ejs %>
+
+ 	<% if (results != null) { %>
+   	    <div class="container">
+      	<div class="row">
+      	<div class="col-sm-4">
+   			<img src="<%= results[0][0].poster %>" alt="Image" width="360" height="500"/>
+		</div>
+		<!--### Column starts ###-->
+		<div class="col-sm-8">
+   		   <h1><%= results[0][0].title %></h1>
+   		   <h3 style="font-style: italic;"><%= results[0][0].tagline %></h3>
+   		   <p>Overview: <%= results[0][0].overview %></p>
+   	   	   <p>Genres: <%= results[0][0].genre %></p>
+   	   	   <p>Runtime: <%= results[0][0].runtime %> minutes</p>
+   	   	   <p>Votes: <%= results[0][0].votes %></p>
+
+   	   	   <p>Homepage: 
+   	   	   <% if (results[0][0].homepage!='') { %>
+   	   	   <a href="<%= results[0][0].homepage %>"><%= results[0][0].homepage %></a>
+   	   	   <% } else { %>
+   	   	    homepage not found.
+   	   	   <% } %>
+   	   	   </p>
+   	   	   
+   	   	<!-- #### Three buttons ### -->
+   	   	
+		<div class="three_button">
+		<% var loggedIn; %>
+      	<% try { %>
+      		<% if (user) { %>
+      			<% loggedIn = true; %>
+      		<% } else { %>
+      			<% loggedIn = false; %>
+      		<% } %>
+      	<% } catch (e) { %>
+      		<% loggedIn = false; %>
+      	<% } %>
+      	
+      	<form id="watched_btn" method="get" action="/watchedMovie" style="display:inline-block">
+		<button type="submit" class="btn btn-default" <% if (!loggedIn) { %> disabled <% } %>>Watched</button>
+		<input type="hidden" name="username" value=<%= user %>>
+      	<input type="hidden" name="movieId" value=<%= results[0][0].movieId %>>
+		</form>
+		
+		<form id="towatch_btn" method="get" action="/towatchMovie" style="display:inline-block">
+		<button type="submit" class="btn btn-default" <% if (!loggedIn) { %> disabled <% } %>>To Watch</button>
+		<input type="hidden" name="username" value=<%= user %>>
+      	<input type="hidden" name="movieId" value=<%= results[0][0].movieId %>>
+		</form>
+		
+		<form id="recommend_btn" method="get" action="/recommend" style="display:inline-block">
+		<button type="submit" class="btn btn-default" <% if (!loggedIn) { %> disabled <% } %>>Recommend</button>
+		<input type="hidden" name="username" value=<%= user %>>
+      	<input type="hidden" name="movieId" value=<%= results[0][0].movieId %>>
+		</form>
+		<br>
+		<% try { if (error_watch) { %>
+                <label><font color=red><%= error_watch %></font></label>
+            <% }} catch (e) {} %>
+            <% try { if (message_watch) { %>
+                <label><font color=green><%= message_watch %></font></label>
+        <% }} catch (e) {} %>
+        
+        <% try { if (error_towatch) { %>
+                <label><font color=red><%= error_towatch %></font></label>
+            <% }} catch (e) {} %>
+            <% try { if (message_towatch) { %>
+                <label><font color=green><%= message_towatch %></font></label>
+        <% }} catch (e) {} %>
+        
+        <% try { if (error_rec) { %>
+                <label><font color=red><%= error_rec %></font></label>
+            <% }} catch (e) {} %>
+            <% try { if (message_rec) { %>
+                <label><font color=green><%= message_rec %></font></label>
+        <% }} catch (e) {} %>
+		</div>
+		<br>
+		<label>Totally <%= results[2][0]['count(movieId)'] %> people recommended this movie</label>
+		<!-- #### Three buttons End ### -->
+		
+		<!-- ### Add collection ###-->
+        <div class="add_collection">
+        <form id="collectionForm" method="get" action="/updateCollection">
+            <select name="collectionName">
+            <% for (var i = 0; i < results[6].length; i++) { %>
+                <option value="<%= results[6][i].name %>"><%= results[6][i].name %></option>
+            <% } %>
+            </select>
+            <input name="movieId" value=<%= results[0][0].movieId %> type="hidden" />
+            <button type="submit" class="btn btn-default" <% if (results[6].length == 0) { %> disabled <% } %>>Add to Collection!</button>
+            <% if (results[6].length == 0) { %>
+                <br><label>You haven't made any collections!  Go to your profile page to create a new collection</label>
+            <% } %>
+            <% try { if (error) { %>
+                <label><font color=red><%= error %></font></label>
+            <% }} catch (e) {} %>
+            <% try { if (message) { %>
+                <label><font color=green><%= message %></font></label>
+            <% }} catch (e) {} %>
+        </form>
+        </div>
+        <!-- ### Add Collection End ### -->
+		
+		
+		
+   	   	</div> <!--### Column End ###--> 
+		</div>
+		</div>
+		
+		
+
+
+		
+
+        <% if (results[1] != null) { %>
+        <div class="container">
+            <% try { if (error_friend) { %>
+               <label><font color=red><%= error_friend %></font></label>
+            <% }} catch (e) {} %>
+            <% try { if (message_friend) { %>
+              	<label><font color=green><%= message_friend %></font></label>
+           	<% }} catch (e) {} %>
+            <% for (var i = 0; i < results[1].length; i++) { %>
+                
+                <div class="row">
+                <hr></hr>
+                <div class="col-sm-2">
+                <h4><%= results[1][i].username %></h4>
+                <% if (results[1][i].username != user) { %>
+                <form id="addfriend" method="post" action="/addfriend">
+                
+                <button type="submit" class="btn btn-default" <% if (!loggedIn) { %> disabled <% } %>>add friend</button>
+                <input type="hidden" name="reviewUser" value=<%= results[1][i].username %> >
+                </form>
+                <% } %>
+                </div>
+                <div class="col-sm-10" style="background-color:#f2f2f2;">
+                <h4><%= "Rating : " + results[1][i].rating %></h4>
+                <p><%= results[1][i].body %></p>
+                </div>
+                </div>        
+            <% } %>
+          </div>
+        <% } %>
+		
+        <div class="container">
+        <div class="form-group">
+            <label for="add_review">Add your review</label>
+            <form action="/review" method="post">
+                <textarea class="form-control" row="5" name="review_text" required></textarea>
+                <input type="hidden" name="movieId" value=<%= results[0][0].movieId %>>
+                Rating:
+                <select name = "rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
+        </div>
+        </div>
+        
+    <% } %>
+
+
+  </body>
+</html>

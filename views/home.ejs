@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ./_head.ejs %>
+<style>
+
+#search_container{
+text-align:center;
+background-color: transparent;
+background:
+linear-gradient(
+      rgba(97, 99, 102, 0.4), 
+      rgba(97, 99, 102, 0.1)
+    ), 
+url(images/2.jpg);
+background-size: cover;
+height: 810px;
+width: 100%;
+}
+.overlay{
+background: rgba(70, 72, 82, 0.3);
+}
+
+.search_h{
+position: relative;
+top: 110px;
+margin: 0 auto;
+}
+
+.search_p{
+position: relative;
+top: 60px;
+margin: 0 auto;
+}
+
+#img_h{
+color: #424242;
+font-family: "Raleway"
+letter-spacing:0.1em;
+text-align:center;
+margin: 40px auto;
+text-transform: lowercase;
+font-size: 128pt;
+font-variant: small-caps;
+}
+
+#img_p{
+color: #424242;
+font-family: "Raleway"
+letter-spacing:0.1em;
+text-align:center;
+text-transform: lowercase;
+font-size: 16pt;
+font-variant: small-caps;
+}
+
+.search_box{
+position: relative;
+margin: 0 auto;
+top: 80px;
+}
+
+::-webkit-input-placeholder { font-size: 16pt;line-height: 4em;}
+::-moz-placeholder { font-size: 16pt;line-height: 4em;}
+:-ms-input-placeholder { font-size: 16pt;line-height: 4em;}
+input:-moz-placeholder { font-size: 16pt;line-height: 4em;}
+
+input{
+background-color: transparent;
+color: #ffffff;
+border:0;
+outline:0;
+border-bottom: 2px solid #ffffff;
+}
+.search_button{
+position: relative;
+margin: 0 auto;
+top: 95px;
+}
+.btn-button-name, .btn-button-name:link, .btn-button-name:visited {
+    background-color: transparent;
+    border-radius: 0;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+.btn-button-name:active, .btn-button-name:hover {
+    background-color: #ffffff;
+    color: #5c6166
+}
+
+.well{
+background-color:transparent;
+}
+
+.carousel-inner.img{
+width: 500;
+height: 500;
+}
+.carousel-control .glyphicon-circle-arrow-left,
+.carousel-control .glyphicon-circle-arrow-right{
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	z-index: 5;
+}
+
+a.left.carousel-control,
+a.right.carousel-control{
+background: transparent;
+border: none;
+width: 30px;
+}
+#panel_heading1,#panel_heading2, #panel_heading3{
+	background:none;
+	border:none;
+	outline:none;
+	
+}
+hr.style-one{
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+hr.style-two {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
+
+.bg-4 { 
+ background-color: #2f2f2f; /* Black Gray */
+ color: #fff;
+}
+
+
+
+</style>	
+</head>
+<body style="height:1000px">
+
+<!-- ################# NavBar Start#####################-->
+	<% include ./_nav-bar.ejs %>
+<!-- ################# NavBar End#####################-->
+
+
+<div id="top" class="row" >
+ <!-- ################# Search Start#####################-->  
+
+  <div class="container" id="search_container">
+  	
+  	<div class="search_h">
+    <h1 id="img_h"><font color="white"><strong>MovieBook</strong></font></h1>
+    </div>
+    <div class="search_p">   
+    <p id="img_p"><font color="white"><strong>"A radical new movieDb."</strong></font></p>
+    </div>
+    
+    <form class="form" id="searchForm" method="get" action="">
+    	<div class="search_box">
+    	<input type="text" name="keyword" style="font-size:32pt; color=#fff;" class="search-query" size="25" placeholder="Key word, movie name, actor name..."/>		
+    	</div>
+    	<div class="search_button" style="text-align: center">
+    		<button type="submit" class="btn btn-button-name btn-lg" onclick="normalSearch()" style="width:200px;">Search</button>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		<button type="submit" class="btn btn-button-name btn-lg" onclick="bingSearch()" style="width:200px;">BingSearch</button>
+    	</div>
+    </form>
+    
+  </div>
+  <script>
+  	form=document.getElementById("searchForm");
+  	function normalSearch() {
+    	      form.action="/searchMovie";
+        	  form.submit();
+  	}
+  	function bingSearch() {
+    	      form.action="/bingSearch";
+        	  form.submit();
+  	}
+  </script>
+
+<!-- ################# Search End#####################-->
+</div>
+
+<div id="bottom" class="row">
+	<div class="container">
+  <!-- ################# Carousel Start#####################-->
+    <div class="row">  
+   	 <div class="col-md-12">
+
+        <div class="well">
+            <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+            <% var temp0 = results[0][0]%>
+            <% var temp1 = results[0][1]%>
+            <% var temp2 = results[0][2]%>
+            <% var temp3 = results[0][3]%>
+            <% var temp4 = results[0][4]%>
+            <% var temp5 = results[0][5]%>
+            <% var temp6 = results[0][6]%>
+            <% var temp7 = results[0][7]%>
+            <% var temp8 = results[0][8]%>
+            <% var temp9 = results[0][9]%>
+            <% var temp10 = results[0][10]%>
+            <% var temp11 = results[0][11]%>
+			<% var m_poster = "poster" %>  	
+     		<% var m_id ="movieId" %>
+			<% var m_title = "title" %>
+                
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-2">
+                            <form id="homeMovie" method="get" action="/review">
+                            <a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+                            <img src="<%= temp0[m_poster] %>" alt="Image" class="img-responsive"/>
+                            </a>
+  							<input type="hidden" name="id" value=<%= temp0[m_id] %> />
+  							</form>
+  							</div>
+                         
+                            
+                            <div class="col-sm-2">
+                            <form id="homeMovie" method="get" action="/review">
+                            <a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+                            <img src="<%= temp1[m_poster] %>" alt="Image" class="img-responsive"/>
+                            </a>
+                            <input type="hidden" name="id" value=<%= temp1[m_id] %> />                
+                            </form>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                            <form id="homeMovie" method="get" action="/review">
+                            <a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+                            <img src="<%= temp2[m_poster] %>" alt="Image" class="img-responsive"/>
+                            </a>
+  							<input type="hidden" name="id" value=<%= temp2[m_id] %> />
+  							</form>
+  							</div>
+                           
+                            
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp3[m_poster] %>" alt="Image" class="img-responsive"/>
+							</a>
+  							<input type="hidden" name="id" value=<%= temp3[m_id] %> />
+  							</form>
+  							</div>
+  							
+  							<div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp4[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/>
+							</a>
+  							<input type="hidden" name="id" value=<%= temp4[m_id] %> />
+  							</form>
+  							</div>
+  							
+  							<div class="col-sm-2">     
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp5[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/>
+							</a>
+  							<input type="hidden" name="id" value=<%= temp5[m_id] %> />
+  							</form>
+  							</div>
+                           
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp6[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/>
+							</a>
+  							<input type="hidden" name="id" value=<%= temp6[m_id] %> />
+  							</form>
+  							</div>
+                            
+                            
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp7[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/>
+							</a>
+  							<input type="hidden" name="id" value=<%= temp7[m_id] %> />
+  							</form>
+  							</div>
+  							
+  							                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp8[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/></a>
+  							<input type="hidden" name="id" value=<%= temp8[m_id] %> />
+  							</form>
+  							</div>
+                           
+                            
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp9[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/></a>
+  							<input type="hidden" name="id" value=<%= temp9[m_id] %> />
+  							</form>
+  							</div>
+                            
+                            
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp10[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/></a>
+  							<input type="hidden" name="id" value=<%= temp10[m_id] %> />
+  							</form>
+  							</div>
+                            
+                            
+                            <div class="col-sm-2">
+							<form id="homeMovie" method="get" action="/review">
+							<a href="javascript:void(0);" onclick="$(this).closest('form').submit()">
+							<img src="<%= temp11[m_poster] %>" alt="Image" width="500" height="500" class="img-responsive"/></a>
+  							<input type="hidden" name="id" value=<%= temp11[m_id] %> />
+  							</form>
+  							</div>
+                            
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                </div>
+                <!--/carousel-inner--> 
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                	<span class="glyphicon glyphicon-circle-arrow-left" style="left: 8px;"></span>
+                </a>
+
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                	<span class="glyphicon glyphicon-circle-arrow-right" style="right: 8px;"></span>
+                </a>
+            </div>
+            <!--/myCarousel-->
+        </div>
+        <!--/well-->
+	
+	</div>
+	</div>
+<!-- ################# Carousel End#####################-->
+ 	<br>
+ 	<br>
+ 	<br>
+  
+<!-- ################# Featured collections Start#####################-->  
+  <div class="row" id="row3">
+    <h style="font-size:40px;">Featured Collections</h>
+    <hr class="style-one">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-transparent">
+        <div class="panel-heading" id="panel_heading1">
+          <h style="font-size:32px;">Top Rated</h>
+        </div>
+        <div class="panel-body">
+          <% for (var i = 0; i < results[1].length; i++) { %>
+          		<form id="homeMovie" method="get" action="/review">
+                <p style="font-size:17px;"><a href="javascript:void(0);" onclick="$(this).closest('form').submit()"><%= results[1][i].title %></a></p>
+                <hr class="style-two">
+                <input type="hidden" name="id" value=<%= results[1][i].movieId %> /> 
+                </form>            
+            <% } %>
+        </div>
+      </div> 
+    </div> 
+    <div class="col-sm-4">
+      <div class="panel panel-transparent">
+        <div class="panel-heading" id="panel_heading2">
+          <h style="font-size:32px;">Lowest Votes</h>
+        </div>
+        <div class="panel-body">
+          <% for (var i = 0; i < results[2].length; i++) { %>
+          		<form id="homeMovie" method="get" action="/review">
+                <p style="font-size:17px;"><a href="javascript:void(0);" onclick="$(this).closest('form').submit()"><%= results[2][i].title %></a></p>
+                <hr class="style-two">
+                <input type="hidden" name="id" value=<%= results[2][i].movieId %> /> 
+                </form>             
+            <% } %>
+        </div>
+      </div> 
+    </div> 
+   <div class="col-sm-4">
+      <div class="panel panel-transparent">
+        <div class="panel-heading" id="panel_heading3">
+          <h style="font-size:32px;">Longest Runtime</h>
+        </div>
+        <div class="panel-body">
+          <% for (var i = 0; i < results[3].length; i++) { %>
+          		<form id="homeMovie" method="get" action="/review">
+                <p style="font-size:17px;"><a href="javascript:void(0);" onclick="$(this).closest('form').submit()"><%= results[3][i].title %></a></p>
+                <hr class="style-two">
+                <input type="hidden" name="id" value=<%= results[3][i].movieId %> /> 
+                </form>             
+            <% } %>
+        </div>
+      </div> 
+    </div> 
+  </div>
+</div>
+<!-- ################# Featured collections End#####################-->  
+</div>
+</div>
+
+
+<footer class="container-fluid bg-4 text-center">
+  <p style="top:50%;">Group SSSX</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./_head.ejs %>
+    <link href="stylesheets/login_register.css" rel="stylesheet" type="text/css">
+</head>
+<body style="height:100px">
+
+<% include ./_nav-bar.ejs %>
+
+<div class="container">
+
+	<div class="login_register">
+	<h1>Sign up</h1>
+	<% try { if (message) { %>
+           <label><font color=white><%= message %></font></label>
+    <% }} catch (e) {} %>
+    <form id="signup"method="post" action="/register">
+    	<input type="text" name="username" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <input type="text" name="firstname" placeholder="First name" required="required" />
+        <input type="text" name="lastname" placeholder="Last name" required="required" />
+        <input type="email" name="email" placeholder="Email" required="required" />
+        <input type="text" name="self_description" placeholder="Self description" />
+        
+    </form>
+    
+    	<button type="submit" class="btn btn-primary btn-block btn-large" onclick="submit_two_forms()">Join now</button>
+    <script>
+    	function submit_two_forms(){
+    		document.getElementById("signup").submit();
+    	}
+    </script>
+    	
+	</div>
+</div>
+</body>
+</html>

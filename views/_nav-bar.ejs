@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/home">Moviebook</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+      	<% var loggedIn; %>
+      	<% try { %>
+      		<% if (user) { %>
+      			<% loggedIn = true; %>
+      		<% } else { %>
+      			<% loggedIn = false; %>
+      		<% } %>
+      	<% } catch (e) { %>
+      		<% loggedIn = false; %>
+      	<% } %>
+      	
+      	<% if (loggedIn) { %>
+      		<li><a href="/profile"><span class="glyphicon glyphicon-user"></span> <%= user %></a></li>
+      		<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      	<% } else { %>
+  			<li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+  			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      	<% } %>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="/home">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

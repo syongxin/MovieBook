@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./_head.ejs %>
+</head>
+<body>
+
+	<% include ./_nav-bar.ejs %>
+
+<div class="container">
+	<h1>Search Results</h1><br>
+<!-- ################# Search Start#####################-->  
+  <div style="text-left">
+    <form class="form-inline" id="searchForm" method="get" action="">
+    	<input type="text" name="keyword" class="form-control search-query" size="70" placeholder="Key word, movie name, actor name...">
+    	<button type="submit" class="btn btn-danger" onclick="normalSearch()">Search</button>
+    	<button type="submit" class="btn btn-danger" onclick="bingSearch()">BingSearch</button>
+    </form>
+  </div>
+  <script>
+  	form=document.getElementById("searchForm");
+  	function normalSearch() {
+    	      form.action="/searchMovie";
+        	  form.submit();
+  	}
+  	function bingSearch() {
+    	      form.action="/bingSearch";
+        	  form.submit();
+  	}
+  </script>
+<!-- ################# Search End#####################-->
+	<% if (results == null) { %>
+    	   		<p>So sorry, no results found :(</p>	
+        <% } 
+           else { %>
+				<% for(var i=0; i<results.length; i++) { %>
+				<% var temp = results[i]%>
+				<% var m_id = "movieId" %> 
+				<% var m_title = "title" %>
+				<% var m_overview = "overview" %>
+			<!--	<h4><a href="/review"><%= m_id %> : <%= temp[m_id] %></a></h3> --> <!-- Used for check movieId -->
+				<form id="resultTitle" method="get" action="/review">
+				<h3><a href="javascript:void(0);" onclick="$(this).closest('form').submit()"><%= temp[m_title] %></a></h3>
+			    <input type="hidden" name="id" value=<%= temp[m_id] %> />
+				</form>
+				<p><%= m_overview %> : <%= temp[m_overview] %></p>
+					
+				<% } %>
+		<% } %>	
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+body {
+  background: url("http://matiaroglic.weebly.com/uploads/2/7/7/3/27738215/9970712_orig.jpg");
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.heading {
+  text-align: center;
+}
+
+h1 {
+  padding-top: 3cm;
+  color: white;
+  font-size: 500%;
+}
+
+p {
+  padding-top: 2cm;
+  color: white;
+  font-size: 200%;
+}

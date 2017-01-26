@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./_head.ejs %>
+</head>
+<body>
+
+ <% include ./_nav-bar.ejs %>
+
+<div class="container">
+	<h1>Bing Search Results</h1><br>
+<!-- ################# Search Start#####################-->  
+  <div style="text-left">
+    <form class="form-inline" id="searchForm" method="get" action="">
+    	<input type="text" name="keyword" class="form-control search-query" size="70" placeholder="Key word, movie name, actor name...">
+    	<button type="submit" class="btn btn-danger" onclick="normalSearch()">Search</button>
+    	<button type="submit" class="btn btn-danger" onclick="bingSearch()">BingSearch</button>
+    </form>
+  </div>
+  <script>
+  	form=document.getElementById("searchForm");
+  	function normalSearch() {
+    	      form.action="/searchMovie";
+        	  form.submit();
+  	}
+  	function bingSearch() {
+    	      form.action="/bingSearch";
+        	  form.submit();
+  	}
+  </script>
+<!-- ################# Search End#####################-->
+	<% if (results == null) { %>
+			<p>So sorry, no results found :(</p>	
+        <% } 
+           else { %>
+				<% for(var i=0; i<results.length; i++) { %>
+				<% var temp = results[i]%> 
+				<% var result_title = "title" %>
+				<% var result_description = "description" %>
+				<% var result_url = "url" %>
+				<h3><a href="<%=temp[result_url]%>"><%= temp[result_title] %></a></h3>
+				<p><%= temp[result_description] %></p>
+				<p><%= temp[result_url] %></p>
+					
+				<% } %>
+		<% } %>	
+	
+</div>
+</body>
+</html>
